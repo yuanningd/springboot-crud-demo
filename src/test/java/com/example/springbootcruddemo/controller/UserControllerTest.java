@@ -67,7 +67,7 @@ class UserControllerTest {
     void shouldReturn200AndUserDtoWhenGetUserDto() throws Exception {
         mockMvc.perform(get("/users/" + mockUserId.toString()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("a@gmail.com"));
+                .andExpect(jsonPath("$.id").value(mockUserId.toString()));
     }
 
     // Todo: Add delete method test
