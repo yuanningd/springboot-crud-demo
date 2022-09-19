@@ -1,7 +1,6 @@
-package com.example.springbootcruddemo.controller;
+package com.example.springbootcruddemo.exception;
 
 import com.example.springbootcruddemo.dto.ErrorDto;
-import com.example.springbootcruddemo.exception.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
