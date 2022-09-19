@@ -29,7 +29,7 @@ public record UserService(UserRepository userRepository, UserMapper userMapper) 
     }
 
     public void delete(Long userId) {
-        userRepository.delete(find(userId));
+        userRepository.deleteById(userId);
     }
 
     public User find(Long userId) {
