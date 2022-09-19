@@ -21,7 +21,6 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "property")
 public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
