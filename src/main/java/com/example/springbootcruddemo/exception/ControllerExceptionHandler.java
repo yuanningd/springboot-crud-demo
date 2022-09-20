@@ -33,7 +33,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorDto handleAllExceptions(Exception e) {
+    public ErrorDto handleUnexpectedExceptions(Exception e) {
         log.error("There is an unexpected exception occurred", e);
 
         return new ErrorDto(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), List.of(e.getMessage()));

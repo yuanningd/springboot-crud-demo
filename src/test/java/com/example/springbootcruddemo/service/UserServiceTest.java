@@ -64,7 +64,7 @@ public class UserServiceTest {
 
         UserGetDto userGetDto = userService.get(userId);
 
-        assertEquals(userGetDto.getId(), mockUserGetDto.getId());
+        assertEquals(userGetDto, mockUserGetDto);
     }
 
     // Todo: add delete method test
