@@ -1,7 +1,10 @@
 package com.example.springbootcruddemo.controller;
 
+import com.example.springbootcruddemo.constant.PropertyType;
+import com.example.springbootcruddemo.dto.property.PropertyPostDto;
 import com.example.springbootcruddemo.dto.user.UserPatchDto;
 import com.example.springbootcruddemo.dto.user.UserPostDto;
+import com.example.springbootcruddemo.service.PropertyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /** This test is an integration test **/
 @SpringBootTest
 @AutoConfigureMockMvc
-@Transactional
 class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -33,11 +35,16 @@ class UserControllerTest {
     @Autowired
     private UserController userController;
 
+    @Autowired
+    private PropertyService propertyService;
+
     private Long mockUserId;
 
     @BeforeEach
     void setUp() {
         mockUserId = userController.create(new UserPostDto("steven", "a@gmail.com", "passwordpassword8")).getId();
+        propertyService.create(new PropertyPostDto(mockUserId, 55, PropertyType.HOUSE));
+        propertyService.create(new PropertyPostDto(mockUserId, 55, PropertyType.HOUSE));
     }
 
     @Test
@@ -68,6 +75,12 @@ class UserControllerTest {
         mockMvc.perform(get("/users/" + mockUserId.toString()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(mockUserId.toString()));
+    }
+
+    @Test
+    void shouldReturn20AndUserDtoWhenGetUserDto() throws Exception {
+        mockMvc.perform(get("/users"))
+                .andExpect(status().isOk());
     }
 
     // Todo: Add delete method test

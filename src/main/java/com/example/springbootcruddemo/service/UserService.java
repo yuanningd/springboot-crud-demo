@@ -9,6 +9,8 @@ import com.example.springbootcruddemo.model.User;
 import com.example.springbootcruddemo.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public record UserService(UserRepository userRepository, UserMapper userMapper) {
 
@@ -35,4 +37,10 @@ public record UserService(UserRepository userRepository, UserMapper userMapper) 
     public User find(Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException(RESOURCE, userId));
     }
+
+    public void getAll() {
+        List<User> users = userRepository.findAll();
+        users.forEach(user -> user.getProperties().forEach(property -> System.out.println(property.getLandSize())));
+    }
+
 }
